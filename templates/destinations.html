@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations - Fido Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/fido-logo.webp" alt="Fido Car Rental Logo">
+                <span>Fido Rental</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fleetDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Fleet
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
+                            <li><a class="dropdown-item" href="fleet.html">All Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#economy">Economy Cars</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#luxury">Luxury Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#vans">Vans & Buses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="services.html">Self-Drive Rental</a></li>
+                            <li><a class="dropdown-item" href="services.html">Chauffeur Service</a></li>
+                            <li><a class="dropdown-item" href="services.html">Airport Transfer</a></li>
+                            <li><a class="dropdown-item" href="services.html">Long-term Rental</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="destinations.html">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="booking.html" class="btn btn-book-now ms-3">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section style="background: linear-gradient(135deg, #0052CC 0%, rgba(0, 82, 204, 0.9) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container-lg">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Popular Destinations</h1>
+            <p style="font-size: 1.1rem; opacity: 0.95;">Explore East Africa with Fido Car Rental</p>
+        </div>
+    </section>
+
+    <!-- DESTINATIONS SECTION -->
+    <section class="destinations-section">
+        <div class="container-lg">
+            <div class="row g-4">
+                <!-- Kigali -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Kigali,+Rwanda" alt="Kigali">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Kigali</h3>
+                                <p style="margin: 0; opacity: 0.9;">Capital City</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Volcanoes National Park -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Volcanoes+National+Park" alt="Volcanoes National Park">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Volcanoes National Park</h3>
+                                <p style="margin: 0; opacity: 0.9;">Mountain Gorillas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lake Kivu -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Lake+Kivu" alt="Lake Kivu">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Lake Kivu</h3>
+                                <p style="margin: 0; opacity: 0.9;">Scenic Lakeside</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nyungwe Forest -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Nyungwe+Forest" alt="Nyungwe Forest">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Nyungwe Forest</h3>
+                                <p style="margin: 0; opacity: 0.9;">Rainforest Adventure</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Akagera National Park -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Akagera+National+Park" alt="Akagera National Park">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Akagera National Park</h3>
+                                <p style="margin: 0; opacity: 0.9;">Wildlife Safari</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Huye -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="destination-card">
+                        <img src="https://via.placeholder.com/400x300?text=Huye" alt="Huye">
+                        <div class="destination-overlay">
+                            <div>
+                                <h3 class="destination-name">Huye</h3>
+                                <p style="margin: 0; opacity: 0.9;">Historical City</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESTINATION DETAILS SECTION -->
+    <section style="padding: 4rem 0; background-color: white;">
+        <div class="container-lg">
+            <div class="section-title">
+                <h2>Travel Guides</h2>
+                <p>Get the most out of your destination</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Kigali Guide -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="car-card">
+                        <div class="car-card-image">
+                            <span class="car-card-badge">City</span>
+                            <img src="https://via.placeholder.com/400x250?text=Kigali+Guide" alt="Kigali">
+                        </div>
+                        <div class="car-card-body">
+                            <h3 class="car-card-title">Exploring Kigali</h3>
+                            <p style="color: #666; margin-bottom: 1rem; line-height: 1.6;">
+                                Discover the vibrant capital city with its modern architecture, rich history, and bustling markets. Visit the Genocide Memorial and enjoy local cuisine.
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Museums</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Markets</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Dining</span>
+                            </div>
+                            <button class="btn-book-car" onclick="window.location.href='booking.html'">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Volcanoes Guide -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="car-card">
+                        <div class="car-card-image">
+                            <span class="car-card-badge">Safari</span>
+                            <img src="https://via.placeholder.com/400x250?text=Volcanoes+Guide" alt="Volcanoes">
+                        </div>
+                        <div class="car-card-body">
+                            <h3 class="car-card-title">Mountain Gorilla Trek</h3>
+                            <p style="color: #666; margin-bottom: 1rem; line-height: 1.6;">
+                                Experience the unforgettable mountain gorilla trekking in Volcanoes National Park. A once-in-a-lifetime adventure in the misty mountains.
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Trekking</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Wildlife</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Nature</span>
+                            </div>
+                            <button class="btn-book-car" onclick="window.location.href='booking.html'">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lake Kivu Guide -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="car-card">
+                        <div class="car-card-image">
+                            <span class="car-card-badge">Beach</span>
+                            <img src="https://via.placeholder.com/400x250?text=Lake+Kivu+Guide" alt="Lake Kivu">
+                        </div>
+                        <div class="car-card-body">
+                            <h3 class="car-card-title">Lake Kivu Retreat</h3>
+                            <p style="color: #666; margin-bottom: 1rem; line-height: 1.6;">
+                                Relax on the shores of Africa's second-largest freshwater lake. Enjoy water sports, sunset views, and beachside resorts.
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Beaches</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Water Sports</span>
+                                <span style="background-color: #F8F9FA; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.85rem; color: #666;">Relaxation</span>
+                            </div>
+                            <button class="btn-book-car" onclick="window.location.href='booking.html'">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container-lg">
+            <h2>Ready to Explore?</h2>
+            <p>Rent a vehicle and discover the beauty of East Africa at your own pace.</p>
+            <button class="btn-cta" onclick="window.location.href='booking.html'">Book Your Adventure</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Fido Rental</h4>
+                    <p>Fido Car Rental & General Supply is your trusted partner for premium vehicle rental services across East Africa.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="fleet.html">Fleet</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Self-Drive Rental</a></li>
+                        <li><a href="services.html">Chauffeur Service</a></li>
+                        <li><a href="services.html">Airport Transfer</a></li>
+                        <li><a href="services.html">Long-term Rental</a></li>
+                        <li><a href="services.html">Corporate Packages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+250 788 616 618</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>fidocarrental@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kigali, Rwanda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <p>&copy; 2024 Fido Car Rental & General Supply. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

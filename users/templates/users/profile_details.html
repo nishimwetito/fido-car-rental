@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-lg py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Profile Card -->
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    {% if viewed_profile.profile_picture %}
+                        <img src="{{ viewed_profile.profile_picture.url }}" alt="{{ viewed_profile.user.username }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <h3 class="mb-1">{{ viewed_profile.user.get_full_name|default:viewed_profile.user.username }}</h3>
+                    <p class="text-muted">@{{ viewed_profile.user.username }}</p>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-primary">{{ viewed_profile.user.email }}</span>
+                    </div>
+                    
+                    {% if request.user.username == viewed_profile.user.username %}
+                        <a href="{% url 'profile' %}" class="btn btn-primary">
+                            <i class="fas fa-user-edit"></i> Edit My Profile
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Member Info Card -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Member Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="text-muted small">Member Since</label>
+                        <p>{{ viewed_profile.user.date_joined|date:"F d, Y" }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small">Last Active</label>
+                        <p>{{ viewed_profile.user.last_login|date:"F d, Y H:i"|default:"Never" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Personal Details Card -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Personal Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Full Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ viewed_profile.user.first_name }} {{ viewed_profile.user.last_name }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Username</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ viewed_profile.user.username }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Email</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ viewed_profile.user.email }}</p>
+                        </div>
+                    </div>
+                    
+                    {% if viewed_profile.phone_number %}
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <label class="text-muted">Phone Number</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <p>{{ viewed_profile.phone_number }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if viewed_profile.gender %}
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <label class="text-muted">Gender</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <p>{{ viewed_profile.get_gender_display }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if viewed_profile.marital_status %}
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <label class="text-muted">Marital Status</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <p>{{ viewed_profile.get_marital_status_display }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if viewed_profile.date_of_birth %}
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <label class="text-muted">Date of Birth</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <p>{{ viewed_profile.date_of_birth|date:"F d, Y" }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if viewed_profile.address %}
+                        <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <label class="text-muted">Address</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <p>{{ viewed_profile.address|linebreaks }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

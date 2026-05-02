@@ -1,0 +1,73 @@
+/* ===================================
+   PROFILE STYLES
+   =================================== */
+
+/* Profile Cards */
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Profile Images */
+.rounded-circle {
+    border: 3px solid var(--primary-gold);
+    padding: 3px;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 0.75rem;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+}
+
+/* Form Controls */
+.form-control:focus, 
+.form-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 82, 204, 0.1);
+}
+
+/* Responsive Profile */
+@media (max-width: 768px) {
+    .rounded-circle {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    .profile-details .row {
+        margin-bottom: 0.5rem;
+    }
+}

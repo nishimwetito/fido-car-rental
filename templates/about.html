@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fido Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/fido-logo.webp" alt="Fido Car Rental Logo">
+                <span>Fido Rental</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fleetDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Fleet
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
+                            <li><a class="dropdown-item" href="fleet.html">All Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#economy">Economy Cars</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#luxury">Luxury Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#vans">Vans & Buses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="services.html">Self-Drive Rental</a></li>
+                            <li><a class="dropdown-item" href="services.html">Chauffeur Service</a></li>
+                            <li><a class="dropdown-item" href="services.html">Airport Transfer</a></li>
+                            <li><a class="dropdown-item" href="services.html">Long-term Rental</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="destinations.html">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="booking.html" class="btn btn-book-now ms-3">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section style="background: linear-gradient(135deg, #0052CC 0%, rgba(0, 82, 204, 0.9) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container-lg">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">About Fido Car Rental</h1>
+            <p style="font-size: 1.1rem; opacity: 0.95;">Your trusted partner in premium car rental services</p>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section style="padding: 4rem 0; background-color: white;">
+        <div class="container-lg">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <img src="https://via.placeholder.com/500x400?text=About+Fido+Rental" alt="About Fido" class="img-fluid" style="border-radius: 0.75rem;">
+                </div>
+                <div class="col-lg-6">
+                    <h2 style="font-size: 2rem; font-weight: 700; color: #2C3E50; margin-bottom: 1.5rem;">
+                        Who We Are
+                    </h2>
+                    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem; line-height: 1.8;">
+                        Fido Car Rental & General Supply is a leading car rental company serving East Africa with a commitment to excellence, reliability, and customer satisfaction. Founded with a vision to provide premium vehicle rental services, we have grown to become a trusted name in the industry.
+                    </p>
+                    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem; line-height: 1.8;">
+                        With years of experience in the automotive and hospitality sectors, we understand the unique needs of travelers and businesses. Our fleet of well-maintained vehicles and professional team ensure that every journey is comfortable, safe, and memorable.
+                    </p>
+                    <p style="font-size: 1.1rem; color: #666; line-height: 1.8;">
+                        Whether you're exploring the natural beauty of Rwanda, conducting business, or planning a special event, Fido Car Rental is your ideal partner.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION SECTION -->
+    <section style="padding: 4rem 0; background-color: #F8F9FA;">
+        <div class="container-lg">
+            <div class="section-title">
+                <h2>Our Mission & Vision</h2>
+                <p>Driving excellence in car rental services</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-left: 4px solid #0052CC;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #0052CC; margin-bottom: 1rem;">
+                            <i class="fas fa-bullseye"></i> Our Mission
+                        </h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            To provide exceptional car rental services that exceed customer expectations through reliable vehicles, professional service, and competitive pricing. We are committed to making travel convenient, comfortable, and affordable for everyone.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-left: 4px solid #FFC107;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #FFC107; margin-bottom: 1rem;">
+                            <i class="fas fa-star"></i> Our Vision
+                        </h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            To be the leading car rental company in East Africa, recognized for our commitment to quality, innovation, and customer satisfaction. We aspire to expand our services and continue building long-term relationships with our clients.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES SECTION -->
+    <section style="padding: 4rem 0; background-color: white;">
+        <div class="container-lg">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <p>What drives us every day</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We conduct our business with honesty, transparency, and ethical practices.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Customer Focus</h3>
+                        <p>Your satisfaction is our top priority. We listen and respond to your needs.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>We strive for excellence in every aspect of our service delivery.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Sustainability</h3>
+                        <p>We are committed to environmental responsibility and sustainable practices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section style="background: linear-gradient(135deg, #0052CC 0%, rgba(0, 82, 204, 0.9) 100%); color: white; padding: 4rem 0;">
+        <div class="container-lg">
+            <div class="row g-4 text-center">
+                <div class="col-md-6 col-lg-3">
+                    <div style="padding: 2rem;">
+                        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">500+</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Vehicles in Fleet</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="padding: 2rem;">
+                        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">50K+</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Happy Customers</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="padding: 2rem;">
+                        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">15+</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Years Experience</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="padding: 2rem;">
+                        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">24/7</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Customer Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section style="padding: 4rem 0; background-color: #F8F9FA;">
+        <div class="container-lg">
+            <div class="section-title">
+                <h2>Our Team</h2>
+                <p>Dedicated professionals committed to your satisfaction</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div style="background-color: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                        <img src="https://via.placeholder.com/300x300?text=Team+Member" alt="Team Member" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 1.5rem; text-align: center;">
+                            <h3 style="font-size: 1.2rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.25rem;">John Doe</h3>
+                            <p style="color: #0052CC; font-weight: 600; margin-bottom: 0.75rem;">General Manager</p>
+                            <p style="color: #666; font-size: 0.9rem;">15+ years in automotive industry</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="background-color: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                        <img src="https://via.placeholder.com/300x300?text=Team+Member" alt="Team Member" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 1.5rem; text-align: center;">
+                            <h3 style="font-size: 1.2rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.25rem;">Sarah Johnson</h3>
+                            <p style="color: #0052CC; font-weight: 600; margin-bottom: 0.75rem;">Operations Manager</p>
+                            <p style="color: #666; font-size: 0.9rem;">10+ years in logistics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="background-color: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                        <img src="https://via.placeholder.com/300x300?text=Team+Member" alt="Team Member" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 1.5rem; text-align: center;">
+                            <h3 style="font-size: 1.2rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.25rem;">Michael Brown</h3>
+                            <p style="color: #0052CC; font-weight: 600; margin-bottom: 0.75rem;">Customer Service Lead</p>
+                            <p style="color: #666; font-size: 0.9rem;">8+ years in customer care</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div style="background-color: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                        <img src="https://via.placeholder.com/300x300?text=Team+Member" alt="Team Member" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 1.5rem; text-align: center;">
+                            <h3 style="font-size: 1.2rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.25rem;">Emily Davis</h3>
+                            <p style="color: #0052CC; font-weight: 600; margin-bottom: 0.75rem;">Fleet Manager</p>
+                            <p style="color: #666; font-size: 0.9rem;">12+ years in vehicle maintenance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container-lg">
+            <h2>Ready to Experience the Fido Difference?</h2>
+            <p>Join thousands of satisfied customers who trust us with their car rental needs.</p>
+            <button class="btn-cta" onclick="window.location.href='booking.html'">Book Now</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Fido Rental</h4>
+                    <p>Fido Car Rental & General Supply is your trusted partner for premium vehicle rental services across East Africa.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="fleet.html">Fleet</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Self-Drive Rental</a></li>
+                        <li><a href="services.html">Chauffeur Service</a></li>
+                        <li><a href="services.html">Airport Transfer</a></li>
+                        <li><a href="services.html">Long-term Rental</a></li>
+                        <li><a href="services.html">Corporate Packages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+250 788 616 618</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>fidocarrental@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kigali, Rwanda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <p>&copy; 2024 Fido Car Rental & General Supply. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

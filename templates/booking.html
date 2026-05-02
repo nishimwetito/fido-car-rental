@@ -1,0 +1,456 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Ride - Fido Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/fido-logo.webp" alt="Fido Car Rental Logo">
+                <span>Fido Rental</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fleetDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Fleet
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
+                            <li><a class="dropdown-item" href="fleet.html">All Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#economy">Economy Cars</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#luxury">Luxury Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#vans">Vans & Buses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="services.html">Self-Drive Rental</a></li>
+                            <li><a class="dropdown-item" href="services.html">Chauffeur Service</a></li>
+                            <li><a class="dropdown-item" href="services.html">Airport Transfer</a></li>
+                            <li><a class="dropdown-item" href="services.html">Long-term Rental</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="destinations.html">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="booking.html" class="btn btn-book-now ms-3">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section style="background: linear-gradient(135deg, #0052CC 0%, rgba(0, 82, 204, 0.9) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container-lg">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Book Your Ride</h1>
+            <p style="font-size: 1.1rem; opacity: 0.95;">Quick and easy booking process</p>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section style="padding: 4rem 0; background-color: #F8F9FA;">
+        <div class="container-lg">
+            <div class="row g-4">
+                <!-- Booking Form -->
+                <div class="col-lg-8">
+                    <div style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                        <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; color: #2C3E50;">
+                            <i class="fas fa-car" style="color: #0052CC;"></i> Rental Details
+                        </h2>
+
+                        <form action="/book" method="POST">
+                            <!-- Personal Information -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #E0E0E0;">
+                                <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: #2C3E50;">
+                                    <i class="fas fa-user" style="color: #0052CC;"></i> Personal Information
+                                </h3>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="firstName">First Name *</label>
+                                            <input type="text" id="firstName" name="first_name" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="lastName">Last Name *</label>
+                                            <input type="text" id="lastName" name="last_name" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="email">Email Address *</label>
+                                            <input type="email" id="email" name="email" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="phone">Phone Number *</label>
+                                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group-custom">
+                                            <label for="address">Address *</label>
+                                            <input type="text" id="address" name="address" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rental Details -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #E0E0E0;">
+                                <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: #2C3E50;">
+                                    <i class="fas fa-calendar" style="color: #0052CC;"></i> Rental Details
+                                </h3>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="pickupLocation">Pickup Location *</label>
+                                            <select id="pickupLocation" name="pickup_location" class="form-control" required>
+                                                <option value="">Select Location</option>
+                                                <option value="kigali">Kigali Airport</option>
+                                                <option value="kigali-city">Kigali City Center</option>
+                                                <option value="huye">Huye</option>
+                                                <option value="butare">Butare</option>
+                                                <option value="gitarama">Gitarama</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="dropoffLocation">Drop-off Location *</label>
+                                            <select id="dropoffLocation" name="dropoff_location" class="form-control" required>
+                                                <option value="">Select Location</option>
+                                                <option value="same">Same as Pickup</option>
+                                                <option value="kigali">Kigali Airport</option>
+                                                <option value="kigali-city">Kigali City Center</option>
+                                                <option value="huye">Huye</option>
+                                                <option value="butare">Butare</option>
+                                                <option value="gitarama">Gitarama</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="pickupDate">Pickup Date *</label>
+                                            <input type="date" id="pickupDate" name="pickup_date" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="pickupTime">Pickup Time *</label>
+                                            <input type="time" id="pickupTime" name="pickup_time" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="returnDate">Return Date *</label>
+                                            <input type="date" id="returnDate" name="return_date" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="returnTime">Return Time *</label>
+                                            <input type="time" id="returnTime" name="return_time" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle & Service Selection -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #E0E0E0;">
+                                <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: #2C3E50;">
+                                    <i class="fas fa-car" style="color: #0052CC;"></i> Vehicle & Service
+                                </h3>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="vehicleCategory">Vehicle Category *</label>
+                                            <select id="vehicleCategory" name="vehicle_category" class="form-control" required>
+                                                <option value="">Select Category</option>
+                                                <option value="economy">Economy</option>
+                                                <option value="comfort">Comfort</option>
+                                                <option value="luxury">Luxury</option>
+                                                <option value="suv">SUV</option>
+                                                <option value="van">Van</option>
+                                                <option value="bus">Bus</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group-custom">
+                                            <label for="serviceType">Service Type *</label>
+                                            <select id="serviceType" name="service_type" class="form-control" required>
+                                                <option value="">Select Service</option>
+                                                <option value="self-drive">Self-Drive</option>
+                                                <option value="chauffeur">Chauffeur</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="airportPickup" name="airport_pickup">
+                                            <label class="form-check-label" for="airportPickup">
+                                                <i class="fas fa-plane"></i> Airport Pickup/Drop-off
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Options -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #E0E0E0;">
+                                <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: #2C3E50;">
+                                    <i class="fas fa-plus" style="color: #0052CC;"></i> Additional Options
+                                </h3>
+
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="gps" name="gps">
+                                            <label class="form-check-label" for="gps">
+                                                GPS Navigation System (+$5/day)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="childSeat" name="child_seat">
+                                            <label class="form-check-label" for="childSeat">
+                                                Child Safety Seat (+$3/day)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="extraDriver" name="extra_driver">
+                                            <label class="form-check-label" for="extraDriver">
+                                                Additional Driver (+$10/day)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="fullCoverage" name="full_coverage">
+                                            <label class="form-check-label" for="fullCoverage">
+                                                Full Coverage Insurance (+$15/day)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Special Requests -->
+                            <div style="margin-bottom: 2rem;">
+                                <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: #2C3E50;">
+                                    <i class="fas fa-comment" style="color: #0052CC;"></i> Special Requests
+                                </h3>
+
+                                <div class="form-group-custom">
+                                    <label for="specialRequests">Any special requests or preferences?</label>
+                                    <textarea id="specialRequests" name="special_requests" class="form-control" rows="4" placeholder="Please let us know if you have any special requirements..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Terms & Conditions -->
+                            <div style="margin-bottom: 2rem; padding: 1.5rem; background-color: #F8F9FA; border-radius: 0.5rem;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I agree to the <a href="#" style="color: #0052CC; text-decoration: none;">Terms & Conditions</a> and <a href="#" style="color: #0052CC; text-decoration: none;">Privacy Policy</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn-primary-hero" style="width: 100%; padding: 1rem;">
+                                <i class="fas fa-check"></i> Complete Booking
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="col-lg-4">
+                    <div style="background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: sticky; top: 100px;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #2C3E50;">
+                            <i class="fas fa-receipt" style="color: #0052CC;"></i> Booking Summary
+                        </h3>
+
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #E0E0E0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: #666;">Vehicle Category:</span>
+                                <span style="font-weight: 600; color: #2C3E50;">To be selected</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: #666;">Rental Period:</span>
+                                <span style="font-weight: 600; color: #2C3E50;">To be selected</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #666;">Service Type:</span>
+                                <span style="font-weight: 600; color: #2C3E50;">To be selected</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #E0E0E0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: #666;">Base Rate:</span>
+                                <span style="font-weight: 600; color: #2C3E50;">$0.00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: #666;">Additional Options:</span>
+                                <span style="font-weight: 600; color: #2C3E50;">$0.00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: #666;">Tax (18%):</span>
+                                <span style="font-weight: 600; color: #2C3E50;">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div style="background-color: #F8F9FA; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 1.1rem; font-weight: 600; color: #2C3E50;">Total Amount:</span>
+                                <span style="font-size: 1.8rem; font-weight: 700; color: #FFC107;">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div style="background-color: #E8F4FD; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #0052CC;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #0052CC;">
+                                <i class="fas fa-info-circle"></i> <strong>Note:</strong> Final price will be calculated based on your selections.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #E0E0E0;">
+                            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: #2C3E50;">
+                                <i class="fas fa-check-circle" style="color: #28A745;"></i> Why Book With Us?
+                            </h4>
+                            <ul style="list-style: none; margin: 0; padding: 0;">
+                                <li style="margin-bottom: 0.75rem; font-size: 0.9rem; color: #666;">
+                                    <i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Best Price Guarantee
+                                </li>
+                                <li style="margin-bottom: 0.75rem; font-size: 0.9rem; color: #666;">
+                                    <i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Free Cancellation
+                                </li>
+                                <li style="margin-bottom: 0.75rem; font-size: 0.9rem; color: #666;">
+                                    <i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> 24/7 Customer Support
+                                </li>
+                                <li style="font-size: 0.9rem; color: #666;">
+                                    <i class="fas fa-check" style="color: #28A745; margin-right: 0.5rem;"></i> Fully Insured Vehicles
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container-lg">
+            <h2>Need Help?</h2>
+            <p>Contact our customer support team at +250 788 616 618 or fidocarrental@gmail.com</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Fido Rental</h4>
+                    <p>Fido Car Rental & General Supply is your trusted partner for premium vehicle rental services across East Africa.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="fleet.html">Fleet</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Self-Drive Rental</a></li>
+                        <li><a href="services.html">Chauffeur Service</a></li>
+                        <li><a href="services.html">Airport Transfer</a></li>
+                        <li><a href="services.html">Long-term Rental</a></li>
+                        <li><a href="services.html">Corporate Packages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+250 788 616 618</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>fidocarrental@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kigali, Rwanda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <p>&copy; 2024 Fido Car Rental & General Supply. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

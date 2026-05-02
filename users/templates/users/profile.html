@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-lg py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Profile Card -->
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <h3 class="mb-1">{{ profile.user.get_full_name|default:profile.user.username }}</h3>
+                    <p class="text-muted">@{{ profile.user.username }}</p>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-primary">{{ profile.user.email }}</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Profile Info Card -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Profile Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="text-muted small">Member Since</label>
+                        <p>{{ profile.user.date_joined|date:"F d, Y" }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small">Last Login</label>
+                        <p>{{ profile.user.last_login|date:"F d, Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Details Card -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Personal Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Full Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Username</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.user.username }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Email</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.user.email }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Phone Number</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.phone_number|default:"Not provided" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Gender</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.get_gender_display|default:"Not specified" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Marital Status</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.get_marital_status_display|default:"Not specified" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Date of Birth</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.date_of_birth|date:"F d, Y"|default:"Not provided" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label class="text-muted">Address</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{ profile.address|default:"Not provided"|linebreaks }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ profile.user.username }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ profile.user.email }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ profile.user.first_name }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ profile.user.last_name }}">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone_number" name="phone_number" value="{{ profile.phone_number }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="M" {% if profile.gender == 'M' %}selected{% endif %}>Male</option>
+                                <option value="F" {% if profile.gender == 'F' %}selected{% endif %}>Female</option>
+                                <option value="O" {% if profile.gender == 'O' %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="marital_status" class="form-label">Marital Status</label>
+                            <select class="form-control" id="marital_status" name="marital_status">
+                                <option value="">Select Status</option>
+                                <option value="single" {% if profile.marital_status == 'single' %}selected{% endif %}>Single</option>
+                                <option value="married" {% if profile.marital_status == 'married' %}selected{% endif %}>Married</option>
+                                <option value="divorced" {% if profile.marital_status == 'divorced' %}selected{% endif %}>Divorced</option>
+                                <option value="widowed" {% if profile.marital_status == 'widowed' %}selected{% endif %}>Widowed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ profile.date_of_birth|date:'Y-m-d' }}">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" name="address" rows="3">{{ profile.address }}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="profile_picture" class="form-label">Profile Picture</label>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
+                        <small class="text-muted">Leave empty to keep current picture</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

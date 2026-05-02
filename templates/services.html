@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Fido Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %} ">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/fido-logo.webp" alt="Fido Car Rental Logo">
+                <span>Fido Rental</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fleetDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Fleet
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
+                            <li><a class="dropdown-item" href="fleet.html">All Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#economy">Economy Cars</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#luxury">Luxury Vehicles</a></li>
+                            <li><a class="dropdown-item" href="fleet.html#vans">Vans & Buses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="services.html">Self-Drive Rental</a></li>
+                            <li><a class="dropdown-item" href="services.html">Chauffeur Service</a></li>
+                            <li><a class="dropdown-item" href="services.html">Airport Transfer</a></li>
+                            <li><a class="dropdown-item" href="services.html">Long-term Rental</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="destinations.html">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="booking.html" class="btn btn-book-now ms-3">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section style="background: linear-gradient(135deg, #0052CC 0%, rgba(0, 82, 204, 0.9) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container-lg">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Our Services</h1>
+            <p style="font-size: 1.1rem; opacity: 0.95;">Comprehensive car rental solutions tailored to your needs</p>
+        </div>
+    </section>
+
+    <!-- SERVICES DETAIL SECTION -->
+    <section class="services-section">
+        <div class="container-lg">
+            <!-- Self-Drive Rental -->
+            <div style="margin-bottom: 4rem;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6">
+                        <img src="https://via.placeholder.com/500x350?text=Self-Drive+Rental" alt="Self-Drive Rental" class="img-fluid" style="border-radius: 0.75rem;">
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: #2C3E50; margin-bottom: 1rem;">
+                            <i class="fas fa-steering-wheel" style="color: #0052CC;"></i> Self-Drive Rental
+                        </h2>
+                        <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; line-height: 1.8;">
+                            Experience the freedom and flexibility of driving your own vehicle. Our self-drive rental service offers you complete control over your journey with access to our premium fleet of well-maintained vehicles.
+                        </p>
+                        <ul style="list-style: none; margin-bottom: 2rem;">
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Flexible rental periods</strong> - From hourly to monthly options
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Comprehensive insurance</strong> - Full coverage included
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>24/7 roadside assistance</strong> - Help whenever you need it
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>GPS navigation</strong> - Equipped in all vehicles
+                            </li>
+                            <li style="color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Easy booking</strong> - Online or phone reservations
+                            </li>
+                        </ul>
+                        <button class="btn-primary-hero" onclick="window.location.href='booking.html'">Book Self-Drive</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chauffeur Service -->
+            <div style="margin-bottom: 4rem;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 order-lg-2">
+                        <img src="https://via.placeholder.com/500x350?text=Chauffeur+Service" alt="Chauffeur Service" class="img-fluid" style="border-radius: 0.75rem;">
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: #2C3E50; margin-bottom: 1rem;">
+                            <i class="fas fa-user-tie" style="color: #0052CC;"></i> Chauffeur Service
+                        </h2>
+                        <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; line-height: 1.8;">
+                            Sit back, relax, and let our professional drivers handle the road. Our chauffeur service is perfect for business travel, special occasions, or when you simply want to enjoy the journey without the stress of driving.
+                        </p>
+                        <ul style="list-style: none; margin-bottom: 2rem;">
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Professional drivers</strong> - Trained and courteous
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Premium vehicles</strong> - Luxury and comfort guaranteed
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>On-time service</strong> - Punctuality is our priority
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Flexible scheduling</strong> - Hourly or daily rates
+                            </li>
+                            <li style="color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Complimentary refreshments</strong> - Water and snacks included
+                            </li>
+                        </ul>
+                        <button class="btn-primary-hero" onclick="window.location.href='booking.html'">Book Chauffeur</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Airport Transfer -->
+            <div style="margin-bottom: 4rem;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6">
+                        <img src="https://via.placeholder.com/500x350?text=Airport+Transfer" alt="Airport Transfer" class="img-fluid" style="border-radius: 0.75rem;">
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: #2C3E50; margin-bottom: 1rem;">
+                            <i class="fas fa-plane" style="color: #0052CC;"></i> Airport Transfer
+                        </h2>
+                        <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; line-height: 1.8;">
+                            Start or end your journey with confidence. Our airport transfer service ensures convenient pickups and drop-offs with on-time guarantees and professional service every time.
+                        </p>
+                        <ul style="list-style: none; margin-bottom: 2rem;">
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Flight tracking</strong> - We monitor your flight status
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Meet & greet</strong> - Driver holds your name sign
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Fixed pricing</strong> - No hidden charges
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Multiple pickup points</strong> - All major airports covered
+                            </li>
+                            <li style="color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Luggage assistance</strong> - Help with your bags
+                            </li>
+                        </ul>
+                        <button class="btn-primary-hero" onclick="window.location.href='booking.html'">Book Airport Transfer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long-term Rental -->
+            <div style="margin-bottom: 4rem;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 order-lg-2">
+                        <img src="https://via.placeholder.com/500x350?text=Long-term+Rental" alt="Long-term Rental" class="img-fluid" style="border-radius: 0.75rem;">
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: #2C3E50; margin-bottom: 1rem;">
+                            <i class="fas fa-calendar-alt" style="color: #0052CC;"></i> Long-term Rental
+                        </h2>
+                        <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; line-height: 1.8;">
+                            Looking for a vehicle for an extended period? Our long-term rental options offer exceptional value with flexible terms and comprehensive coverage for monthly and yearly rentals.
+                        </p>
+                        <ul style="list-style: none; margin-bottom: 2rem;">
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Competitive monthly rates</strong> - Save up to 40% off daily rates
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Flexible terms</strong> - Customize your rental period
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Maintenance included</strong> - Regular servicing covered
+                            </li>
+                            <li style="margin-bottom: 0.75rem; color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Vehicle replacement</strong> - If your car needs service
+                            </li>
+                            <li style="color: #333;">
+                                <i class="fas fa-check" style="color: #0052CC; margin-right: 0.75rem;"></i>
+                                <strong>Corporate packages</strong> - Special rates for businesses
+                            </li>
+                        </ul>
+                        <button class="btn-primary-hero" onclick="window.location.href='booking.html'">Book Long-term</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section style="background-color: #F8F9FA; padding: 4rem 0;">
+        <div class="container-lg">
+            <div class="section-title">
+                <h2>Why Choose Fido Car Rental?</h2>
+                <p>We set the standard for car rental excellence</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Fully Insured</h3>
+                        <p>Comprehensive insurance coverage on all vehicles for your peace of mind.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer support and roadside assistance.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>5-Star Rated</h3>
+                        <p>Consistently rated 5 stars by our satisfied customers.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Premium Fleet</h3>
+                        <p>Well-maintained vehicles from economy to luxury options.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container-lg">
+            <h2>Ready to Book Your Ride?</h2>
+            <p>Get on the road with Fido Car Rental today. Competitive prices, premium vehicles, and exceptional service.</p>
+            <button class="btn-cta" onclick="window.location.href='booking.html'">Book Now</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Fido Rental</h4>
+                    <p>Fido Car Rental & General Supply is your trusted partner for premium vehicle rental services across East Africa.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="fleet.html">Fleet</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Self-Drive Rental</a></li>
+                        <li><a href="services.html">Chauffeur Service</a></li>
+                        <li><a href="services.html">Airport Transfer</a></li>
+                        <li><a href="services.html">Long-term Rental</a></li>
+                        <li><a href="services.html">Corporate Packages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+250 788 616 618</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>fidocarrental@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kigali, Rwanda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <p>&copy; 2024 Fido Car Rental & General Supply. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
