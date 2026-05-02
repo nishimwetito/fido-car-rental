@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="real-estate-hero">
+    <div class="container-lg">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">Find Your Dream Property</h1>
+                <p class="lead mb-4">Discover houses, plots, and commercial properties across East Africa</p>
+                <div class="search-box">
+                    <form class="d-flex gap-2" method="GET" action="">
+                        <input type="text" class="form-control form-control-lg" name="search" placeholder="Search by location, price, or property name..." value="{{ search_query }}">
+                        <button type="submit" class="btn btn-primary btn-lg px-4">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="filters-section py-4">
+    <div class="container-lg">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <form method="GET" action="" class="row g-3">
+                    {% if search_query %}
+                        <input type="hidden" name="search" value="{{ search_query }}">
+                    {% endif %}
+                    
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Property Type</label>
+                        <select name="property_type" class="form-select" onchange="this.form.submit()">
+                            <option value="">All Properties</option>
+                            <option value="house" {% if property_type == 'house' %}selected{% endif %}>Houses</option>
+                            <option value="plot" {% if property_type == 'plot' %}selected{% endif %}>Plots/Land</option>
+                            <option value="apartment" {% if property_type == 'apartment' %}selected{% endif %}>Apartments</option>
+                            <option value="commercial" {% if property_type == 'commercial' %}selected{% endif %}>Commercial</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Status</label>
+                        <select name="status" class="form-select" onchange="this.form.submit()">
+                            <option value="">All Status</option>
+                            <option value="for_sale" {% if status == 'for_sale' %}selected{% endif %}>For Sale</option>
+                            <option value="for_rent" {% if status == 'for_rent' %}selected{% endif %}>For Rent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label class="form-label fw-semibold">Min Price</label>
+                        <select name="min_price" class="form-select" onchange="this.form.submit()">
+                            <option value="">Any</option>
+                            <option value="50000" {% if min_price == '50000' %}selected{% endif %}>$50,000</option>
+                            <option value="100000" {% if min_price == '100000' %}selected{% endif %}>$100,000</option>
+                            <option value="200000" {% if min_price == '200000' %}selected{% endif %}>$200,000</option>
+                            <option value="500000" {% if min_price == '500000' %}selected{% endif %}>$500,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label class="form-label fw-semibold">Max Price</label>
+                        <select name="max_price" class="form-select" onchange="this.form.submit()">
+                            <option value="">Any</option>
+                            <option value="100000" {% if max_price == '100000' %}selected{% endif %}>$100,000</option>
+                            <option value="200000" {% if max_price == '200000' %}selected{% endif %}>$200,000</option>
+                            <option value="500000" {% if max_price == '500000' %}selected{% endif %}>$500,000</option>
+                            <option value="1000000" {% if max_price == '1000000' %}selected{% endif %}>$1,000,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-2 d-flex align-items-end">
+                        <a href="{% url 'real_estate' %}" class="btn btn-outline-secondary w-100">Clear Filters</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Properties Grid -->
+<section class="properties-section py-5">
+    <div class="container-lg">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3 class="fw-bold">Available Properties</h3>
+                <p class="text-muted">Showing {{ properties|length }} properties</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary active" onclick="setView('grid')">
+                        <i class="fas fa-th-large"></i> Grid
+                    </button>
+                    <button class="btn btn-outline-primary" onclick="setView('list')">
+                        <i class="fas fa-list"></i> List
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="gridView" class="row g-4">
+            {% for property in properties %}
+                <div class="col-md-6 col-lg-4 property-card">
+                    <div class="card h-100 shadow-sm hover-shadow border-0">
+                        <div class="position-relative">
+                            <img src="{% if property.image %}{{ property.image.url }}{% else %}{% static 'images/property-default.jpg' %}{% endif %}" 
+                                 class="card-img-top" 
+                                 alt="{{ property.title }}"
+                                 style="height: 250px; object-fit: cover;">
+                            <span class="property-badge {{ property.status }}">
+                                {{ property.get_status_display }}
+                            </span>
+                            <span class="property-type-badge">
+                                {{ property.get_property_type_display }}
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title fw-bold mb-0">{{ property.title }}</h5>
+                                <span class="property-price">${{ property.price|floatformat:0 }}</span>
+                            </div>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ property.location }}
+                            </p>
+                            <p class="card-text text-muted small">{{ property.description|truncatewords:20 }}</p>
+                            
+                            <div class="property-features mt-3">
+                                {% if property.bedrooms %}
+                                    <span><i class="fas fa-bed"></i> {{ property.bedrooms }} beds</span>
+                                {% endif %}
+                                {% if property.bathrooms %}
+                                    <span><i class="fas fa-bath"></i> {{ property.bathrooms }} baths</span>
+                                {% endif %}
+                                {% if property.area %}
+                                    <span><i class="fas fa-vector-square"></i> {{ property.area }} sqft</span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                    <small class="text-muted">(24)</small>
+                                </div>
+                                <button class="btn btn-sm btn-primary" onclick="viewPropertyDetails({{ property.id }})">
+                                    View Details <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center py-5">
+                        <i class="fas fa-home fa-3x mb-3"></i>
+                        <h4>No properties found</h4>
+                        <p>Try adjusting your search or filters to find what you're looking for.</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- List View (Hidden by default) -->
+        <div id="listView" class="row g-3" style="display: none;">
+            {% for property in properties %}
+                <div class="col-12">
+                    <div class="card shadow-sm hover-shadow border-0">
+                        <div class="row g-0">
+                            <div class="col-md-3">
+                                <img src="{% if property.image %}{{ property.image.url }}{% else %}{% static 'images/property-default.jpg' %}{% endif %}" 
+                                     class="img-fluid rounded-start" 
+                                     alt="{{ property.title }}"
+                                     style="height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title fw-bold">{{ property.title }}</h5>
+                                            <p class="text-muted small">
+                                                <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ property.location }}
+                                            </p>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="property-price">${{ property.price|floatformat:0 }}</span>
+                                            <div>
+                                                <span class="badge {{ property.status }}">{{ property.get_status_display }}</span>
+                                                <span class="badge bg-secondary ms-1">{{ property.get_property_type_display }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">{{ property.description|truncatewords:30 }}</p>
+                                    <div class="property-features mb-2">
+                                        {% if property.bedrooms %}
+                                            <span><i class="fas fa-bed"></i> {{ property.bedrooms }} beds</span>
+                                        {% endif %}
+                                        {% if property.bathrooms %}
+                                            <span><i class="fas fa-bath"></i> {{ property.bathrooms }} baths</span>
+                                        {% endif %}
+                                        {% if property.area %}
+                                            <span><i class="fas fa-vector-square"></i> {{ property.area }} sqft</span>
+                                        {% endif %}
+                                    </div>
+                                    <button class="btn btn-sm btn-primary mt-2" onclick="viewPropertyDetails({{ property.id }})">
+                                        View Details <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if properties.has_other_pages %}
+            <div class="row mt-5">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if properties.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ properties.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if property_type %}&property_type={{ property_type }}{% endif %}{% if status %}&status={{ status }}{% endif %}">
+                                        Previous
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                            {% endif %}
+                            
+                            {% for num in properties.paginator.page_range %}
+                                {% if properties.number == num %}
+                                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                {% elif num > properties.number|add:'-3' and num < properties.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if property_type %}&property_type={{ property_type }}{% endif %}{% if status %}&status={{ status }}{% endif %}">
+                                            {{ num }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if properties.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ properties.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if property_type %}&property_type={{ property_type }}{% endif %}{% if status %}&status={{ status }}{% endif %}">
+                                        Next
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled"><span class="page-link">Next</span></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    /* Real Estate Hero */
+    .real-estate-hero {
+        background: linear-gradient(135deg, #0052CC 0%, #0040a0 100%);
+        color: white;
+        padding: 80px 0;
+        margin-bottom: -40px;
+    }
+    
+    .search-box {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    /* Property Cards */
+    .property-card {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    /* Property Badges */
+    .property-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: white;
+    }
+    
+    .property-badge.for_sale {
+        background-color: #28a745;
+    }
+    
+    .property-badge.for_rent {
+        background-color: #ffc107;
+        color: #333;
+    }
+    
+    .property-type-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+    }
+    
+    /* Property Price */
+    .property-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-gold, #FFC107);
+    }
+    
+    /* Property Features */
+    .property-features {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: #666;
+    }
+    
+    .property-features span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    /* Badge Colors */
+    .badge.for_sale {
+        background-color: #28a745;
+    }
+    
+    .badge.for_rent {
+        background-color: #ffc107;
+        color: #333;
+    }
+    
+    /* Filters Section */
+    .filters-section {
+        position: relative;
+        z-index: 10;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .real-estate-hero {
+            padding: 50px 0;
+        }
+        
+        .real-estate-hero h1 {
+            font-size: 2rem;
+        }
+        
+        .property-features {
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+<script>
+    function setView(view) {
+        const gridView = document.getElementById('gridView');
+        const listView = document.getElementById('listView');
+        const buttons = document.querySelectorAll('.btn-group .btn');
+        
+        if (view === 'grid') {
+            gridView.style.display = 'flex';
+            listView.style.display = 'none';
+            buttons[0].classList.add('active');
+            buttons[1].classList.remove('active');
+            localStorage.setItem('propertyView', 'grid');
+        } else {
+            gridView.style.display = 'none';
+            listView.style.display = 'flex';
+            buttons[0].classList.remove('active');
+            buttons[1].classList.add('active');
+            localStorage.setItem('propertyView', 'list');
+        }
+    }
+    
+    // Load saved view preference
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedView = localStorage.getItem('propertyView');
+        if (savedView === 'list') {
+            setView('list');
+        }
+    });
+    
+    function viewPropertyDetails(propertyId) {
+        // Redirect to property detail page
+        window.location.href = `/real-estate/property/${propertyId}/`;
+    }
+</script>
+{% endblock %}

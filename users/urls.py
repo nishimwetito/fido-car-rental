@@ -5,10 +5,12 @@ urlpatterns = [
     path('login/',views.login_view,name='login'),
     path('logout/',views.logout_view,name='logout'),      
 
-      # Profile URLs
+    # Profile URLs
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profiles/', views.all_profiles, name='all_profiles'),
-    path('profile/<str:username>/', views.profile_detail, name='profile_detail'),      
-
+    path('profile/<str:username>/', views.profile_detail, name='profile_detail'),  
+     # ... your existing URLs
+    path('real-estate/', views.real_estate_list, name='real_estate'),
+   
 ]

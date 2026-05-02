@@ -1,16 +1,17 @@
-from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-from django.core.paginator import Paginator
-from django.db.models import Q
-from django.contrib import messages
-from django.contrib.auth.models import User
-from . forms import RegisterForm
-from .models import Profile
 
 
 # Create your views here.
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.contrib.auth.models import User
+from datetime import datetime
+from .models import Profile, Property
+from .forms import RegisterForm
+
 # REGISTER
 def register_view(request):
     # if request.user.is_authenticated:
@@ -19,51 +20,44 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save( commit= False)
+            user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request,'User created successfully!')
-            login(request,user)
+            messages.success(request, 'User created successfully!')
+            login(request, user)
             return redirect('profile')
-            
-        
     else:
-        messages.error(request, 'Registration failed')
         form = RegisterForm()
 
-    context = {'register_form':form}
-
-    return render (request, 'index.html',context)
+    context = {'register_form': form}
+    return render(request, 'index.html', context)
 
 
 def login_view(request):
-#    if request.user.is_authenticated:
-#        return redirect('dashboard')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-   if request.method == 'POST':
-       username = request.POST.get('username')
-       password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
-       user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Welcome {user.username}')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Invalid username or password')
 
-       if user is not None:
-           login(request, user)
-           messages.success(request, f'Welcome {user.username}')
-           return redirect('profile')
-       else:
-           messages.error(request, 'Invalid username or password')
-
-   return redirect('index')
+    return redirect('index')
 
 
 # LOGOUT
 def logout_view(request):
-   logout(request)
-   messages.success(request,'Successfully logged out')
-   return redirect('login')
+    logout(request)
+    messages.success(request, 'Successfully logged out')
+    return redirect('login')
+
 
 # USER PROFILE
-
 @login_required
 def profile_view(request):
     """
@@ -95,7 +89,12 @@ def edit_profile(request):
         # Check if username is taken (exclude current user)
         if User.objects.exclude(id=user.id).filter(username=username).exists():
             messages.error(request, 'This username is already taken.')
-            return redirect('profile')
+            return redirect('profile_detail', username=user.username)
+        
+        # Check if email is taken (exclude current user)
+        if User.objects.exclude(id=user.id).filter(email=email).exists():
+            messages.error(request, 'This email is already registered.')
+            return redirect('profile_detail', username=user.username)
         
         # Update user fields
         user.username = username
@@ -111,23 +110,30 @@ def edit_profile(request):
         
         date_of_birth = request.POST.get('date_of_birth')
         if date_of_birth:
-            from datetime import datetime
-            profile.date_of_birth = datetime.strptime(date_of_birth, '%Y-%m-%d').date()
+            try:
+                profile.date_of_birth = datetime.strptime(date_of_birth, '%Y-%m-%d').date()
+            except:
+                profile.date_of_birth = None
+        else:
+            profile.date_of_birth = None
         
         profile.address = request.POST.get('address')
         
         # Handle profile picture upload
         if request.FILES.get('profile_picture'):
+            # Delete old picture if exists
+            if profile.profile_picture:
+                profile.profile_picture.delete()
             profile.profile_picture = request.FILES['profile_picture']
         
         profile.save()
         
         messages.success(request, 'Your profile has been updated successfully!')
-        return redirect('profile')
+        # Redirect back to the profile detail page
+        return redirect('profile_detail', username=user.username)
     
-    return redirect('profile')
-
-
+    # If not POST, redirect back to profile
+    return redirect('profile_detail', username=request.user.username)
 
 
 @login_required
@@ -182,4 +188,50 @@ def profile_detail(request, username):
     return render(request, 'users/profile_details.html', context)
 
 
+def real_estate_list(request):
+    """Display list of real estate properties"""
+    properties_list = Property.objects.all()
+    
+    # Search functionality
+    search_query = request.GET.get('search', '')
+    if search_query:
+        properties_list = properties_list.filter(
+            Q(title__icontains=search_query) |
+            Q(location__icontains=search_query) |
+            Q(description__icontains=search_query)
+        )
+    
+    # Filter by property type
+    property_type = request.GET.get('property_type', '')
+    if property_type:
+        properties_list = properties_list.filter(property_type=property_type)
+    
+    # Filter by status
+    status = request.GET.get('status', '')
+    if status:
+        properties_list = properties_list.filter(status=status)
+    
+    # Filter by price range
+    min_price = request.GET.get('min_price', '')
+    if min_price:
+        properties_list = properties_list.filter(price__gte=min_price)
+    
+    max_price = request.GET.get('max_price', '')
+    if max_price:
+        properties_list = properties_list.filter(price__lte=max_price)
+    
+    # Pagination
+    paginator = Paginator(properties_list, 9)  # 9 properties per page
+    page_number = request.GET.get('page')
+    properties = paginator.get_page(page_number)
+    
+    context = {
+        'properties': properties,
+        'search_query': search_query,
+        'property_type': property_type,
+        'status': status,
+        'min_price': min_price,
+        'max_price': max_price,
+    }
+    return render(request, 'users/real_estate.html', context)
 

@@ -64,3 +64,30 @@ class Profile(models.Model):
                     img.save(img_path)
 
 
+class Property(models.Model):
+    PROPERTY_TYPES = [
+        ('house', 'House'),
+        ('plot', 'Plot/Land'),
+        ('apartment', 'Apartment'),
+        ('commercial', 'Commercial'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('for_sale', 'For Sale'),
+        ('for_rent', 'For Rent'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    property_type = models.CharField(max_length=20, choices=PROPERTY_TYPES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
+    location = models.CharField(max_length=200)
+    bedrooms = models.IntegerField(null=True, blank=True)
+    bathrooms = models.IntegerField(null=True, blank=True)
+    area = models.IntegerField(null=True, blank=True, help_text="Area in square feet")
+    image = models.ImageField(upload_to='properties/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
