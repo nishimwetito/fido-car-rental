@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Booking #{{ booking.id }}</h3>
+                    {% if booking.status == 'pending' %}
+                        <span class="badge bg-warning text-dark fs-6">Pending</span>
+                    {% elif booking.status == 'confirmed' %}
+                        <span class="badge bg-success fs-6">Confirmed</span>
+                    {% elif booking.status == 'cancelled' %}
+                        <span class="badge bg-danger fs-6">Cancelled</span>
+                    {% else %}
+                        <span class="badge bg-info fs-6">{{ booking.status|title }}</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-5">
+                            {% if booking.listing.main_image %}
+                                <img src="{{ booking.listing.main_image.url }}" class="img-fluid rounded" alt="{{ booking.listing.title }}">
+                            {% else %}
+                                <div class="bg-light p-5 text-center rounded h-100 d-flex align-items-center justify-content-center">No Image</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-7">
+                            <h4><a href="{% url 'listing_detail' booking.listing.slug %}" class="text-decoration-none text-dark">{{ booking.listing.title }}</a></h4>
+                            <p class="text-muted mb-2"><i class="fas fa-map-marker-alt"></i> {{ booking.listing.location }}</p>
+                            
+                            <hr>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="mb-1 text-muted">Check-in</p>
+                                    <h5>{{ booking.start_date|date:"M d, Y" }}</h5>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-1 text-muted">Check-out</p>
+                                    <h5>{{ booking.end_date|date:"M d, Y" }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="border-bottom pb-2">Payment Details</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Total Price</span>
+                        <strong>${{ booking.total_price }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span>Payment Status</span>
+                        {% if booking.is_paid %}
+                            <strong class="text-success"><i class="fas fa-check-circle"></i> Paid</strong>
+                        {% else %}
+                            <strong class="text-danger"><i class="fas fa-times-circle"></i> Unpaid</strong>
+                        {% endif %}
+                    </div>
+
+                    <h5 class="border-bottom pb-2">Contact Information Provided</h5>
+                    <p class="mb-1"><strong>Name:</strong> {{ booking.full_name }}</p>
+                    <p class="mb-1"><strong>Email:</strong> {{ booking.email }}</p>
+                    <p class="mb-3"><strong>Phone:</strong> {{ booking.phone }}</p>
+
+                    {% if booking.special_requests %}
+                        <h5 class="border-bottom pb-2">Special Requests</h5>
+                        <p>{{ booking.special_requests }}</p>
+                    {% endif %}
+
+                    <div class="mt-4 text-center">
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

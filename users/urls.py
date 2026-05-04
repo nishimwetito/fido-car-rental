@@ -6,11 +6,11 @@ urlpatterns = [
     path('logout/',views.logout_view,name='logout'),      
 
     # Profile URLs
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('my-bookings/', views.my_bookings_view, name='my_bookings'),
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profiles/', views.all_profiles, name='all_profiles'),
     path('profile/<str:username>/', views.profile_detail, name='profile_detail'),  
      # ... your existing URLs
-    path('real-estate/', views.real_estate_list, name='real_estate'),
-   
 ]

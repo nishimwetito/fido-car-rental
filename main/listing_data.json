@@ -1,0 +1,120 @@
+[
+  {
+    "model": "your_app.assettype",
+    "pk": 1,
+    "fields": {
+      "name": "Car",
+      "slug": "car",
+      "icon": "fas fa-car"
+    }
+  },
+  {
+    "model": "your_app.assettype",
+    "pk": 2,
+    "fields": {
+      "name": "Property",
+      "slug": "property",
+      "icon": "fas fa-home"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 1,
+    "fields": {
+      "name": "Economy",
+      "slug": "economy",
+      "asset_type": 1,
+      "icon": "fas fa-car-side"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 2,
+    "fields": {
+      "name": "SUV",
+      "slug": "suv",
+      "asset_type": 1,
+      "icon": "fas fa-caravan"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 3,
+    "fields": {
+      "name": "Luxury",
+      "slug": "luxury",
+      "asset_type": 1,
+      "icon": "fas fa-crown"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 4,
+    "fields": {
+      "name": "Van",
+      "slug": "van",
+      "asset_type": 1,
+      "icon": "fas fa-shuttle-van"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 5,
+    "fields": {
+      "name": "House",
+      "slug": "house",
+      "asset_type": 2,
+      "icon": "fas fa-home"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 6,
+    "fields": {
+      "name": "Land",
+      "slug": "land",
+      "asset_type": 2,
+      "icon": "fas fa-mountain"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 7,
+    "fields": {
+      "name": "Apartment",
+      "slug": "apartment",
+      "asset_type": 2,
+      "icon": "fas fa-building"
+    }
+  },
+  {
+    "model": "your_app.category",
+    "pk": 8,
+    "fields": {
+      "name": "Commercial",
+      "slug": "commercial",
+      "asset_type": 2,
+      "icon": "fas fa-store"
+    }
+  },
+  {
+    "model": "your_app.listingtype",
+    "pk": 1,
+    "fields": {
+      "name": "Rent",
+      "slug": "rent",
+      "is_bookable": true,
+      "description": "Rent this item for a specific period"
+    }
+  },
+  {
+    "model": "your_app.listingtype",
+    "pk": 2,
+    "fields": {
+      "name": "Sale",
+      "slug": "sale",
+      "is_bookable": false,
+      "description": "Buy this item immediately"
+    }
+  }
+]

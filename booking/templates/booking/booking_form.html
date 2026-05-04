@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Book {{ listing.title }}</h3>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            {% if listing.main_image %}
+                                <img src="{{ listing.main_image.url }}" class="img-fluid rounded" alt="{{ listing.title }}">
+                            {% else %}
+                                <div class="bg-light p-4 text-center rounded">No Image</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <h5>{{ listing.title }}</h5>
+                            <p class="text-muted"><i class="fas fa-map-marker-alt"></i> {{ listing.location }}</p>
+                            <h4 class="text-primary">${{ listing.price }} <small class="text-muted">/ day</small></h4>
+                        </div>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <h5 class="mb-3">Booking Details</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="start_date" class="form-label">Start Date *</label>
+                                <input type="date" class="form-control" id="start_date" name="start_date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end_date" class="form-label">End Date *</label>
+                                <input type="date" class="form-control" id="end_date" name="end_date" required>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 mt-4">Contact Information</h5>
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ user.get_full_name|default:user.username }}" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="{{ user.profile.phone_number }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="special_requests" class="form-label">Special Requests (Optional)</label>
+                            <textarea class="form-control" id="special_requests" name="special_requests" rows="3"></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Confirm Request</button>
+                            <a href="{% url 'listing_detail' listing.slug %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

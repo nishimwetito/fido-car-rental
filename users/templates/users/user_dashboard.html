@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" class="rounded-circle mb-3" width="100" height="100" style="object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px; font-size: 2rem;">
+                            {{ user.username|make_list|first|upper }}
+                        </div>
+                    {% endif %}
+                    <h5 class="card-title">{{ user.get_full_name|default:user.username }}</h5>
+                    <p class="text-muted small">{{ user.email }}</p>
+                    <hr>
+                    <div class="nav flex-column nav-pills text-start">
+                        <a href="{% url 'dashboard' %}" class="nav-link active"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                        <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user me-2"></i> My Profile</a>
+                        <a href="{% url 'my_bookings' %}" class="nav-link"><i class="fas fa-calendar-alt me-2"></i> My Bookings</a>
+                        <a href="{% url 'my_listings' %}" class="nav-link"><i class="fas fa-list me-2"></i> My Listings</a>
+                        <a href="{% url 'logout' %}" class="nav-link text-danger mt-3"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <h2 class="mb-4">Dashboard</h2>
+            
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-primary text-white h-100 shadow-sm border-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-uppercase mb-1">Total Bookings</h6>
+                                <h2 class="mb-0">{{ total_bookings }}</h2>
+                            </div>
+                            <i class="fas fa-calendar-check fa-3x opacity-50"></i>
+                        </div>
+                        <a href="{% url 'my_bookings' %}" class="card-footer text-white text-decoration-none d-flex justify-content-between align-items-center">
+                            <span class="small">View Details</span>
+                            <i class="fas fa-chevron-right small"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-success text-white h-100 shadow-sm border-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-uppercase mb-1">My Listings</h6>
+                                <h2 class="mb-0">{{ total_listings }}</h2>
+                            </div>
+                            <i class="fas fa-home fa-3x opacity-50"></i>
+                        </div>
+                        <a href="{% url 'my_listings' %}" class="card-footer text-white text-decoration-none d-flex justify-content-between align-items-center">
+                            <span class="small">View Details</span>
+                            <i class="fas fa-chevron-right small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Recent Bookings</h5>
+                    <a href="{% url 'my_bookings' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Listing</th>
+                                    <th>Dates</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in recent_bookings %}
+                                <tr>
+                                    <td><a href="{% url 'booking:detail' booking.id %}" class="text-decoration-none">{{ booking.listing.title }}</a></td>
+                                    <td>{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</td>
+                                    <td>${{ booking.total_price }}</td>
+                                    <td>
+                                        {% if booking.status == 'pending' %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% elif booking.status == 'confirmed' %}
+                                            <span class="badge bg-success">Confirmed</span>
+                                        {% elif booking.status == 'cancelled' %}
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ booking.status|title }}</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-3 text-muted">You have no recent bookings.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Listings -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">My Recent Listings</h5>
+                    <div>
+                        <a href="{% url 'listing_create' %}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Add New</a>
+                        <a href="{% url 'my_listings' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for listing in user_listings %}
+                                <tr>
+                                    <td><a href="{% url 'listing_detail' listing.slug %}" class="text-decoration-none">{{ listing.title }}</a></td>
+                                    <td>{{ listing.asset_type.name }}</td>
+                                    <td>${{ listing.price }}</td>
+                                    <td>
+                                        {% if listing.is_available %}
+                                            <span class="badge bg-success">Available</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Unavailable</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-3 text-muted">You haven't posted any listings yet.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

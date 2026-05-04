@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.models import User
 from datetime import datetime
-from .models import Profile, Property
+from .models import Profile
 from .forms import RegisterForm
 
 # REGISTER
@@ -58,6 +58,43 @@ def logout_view(request):
 
 
 # USER PROFILE
+from booking.models import Booking
+from main.models import Listing
+
+@login_required
+def dashboard_view(request):
+    """
+    User dashboard with overview
+    """
+    user = request.user
+    recent_bookings = Booking.objects.filter(user=user).order_by('-created_at')[:5]
+    user_listings = Listing.objects.filter(user=user).order_by('-created_at')[:5]
+    
+    context = {
+        'recent_bookings': recent_bookings,
+        'user_listings': user_listings,
+        'total_bookings': Booking.objects.filter(user=user).count(),
+        'total_listings': Listing.objects.filter(user=user).count(),
+    }
+    return render(request, 'users/user_dashboard.html', context)
+
+@login_required
+def my_bookings_view(request):
+    """
+    List of user's bookings
+    """
+    bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
+    
+    status = request.GET.get('status')
+    if status:
+        bookings = bookings.filter(status=status)
+        
+    context = {
+        'bookings': bookings,
+        'current_status': status,
+    }
+    return render(request, 'users/my_bookings.html', context)
+
 @login_required
 def profile_view(request):
     """
@@ -188,50 +225,4 @@ def profile_detail(request, username):
     return render(request, 'users/profile_details.html', context)
 
 
-def real_estate_list(request):
-    """Display list of real estate properties"""
-    properties_list = Property.objects.all()
-    
-    # Search functionality
-    search_query = request.GET.get('search', '')
-    if search_query:
-        properties_list = properties_list.filter(
-            Q(title__icontains=search_query) |
-            Q(location__icontains=search_query) |
-            Q(description__icontains=search_query)
-        )
-    
-    # Filter by property type
-    property_type = request.GET.get('property_type', '')
-    if property_type:
-        properties_list = properties_list.filter(property_type=property_type)
-    
-    # Filter by status
-    status = request.GET.get('status', '')
-    if status:
-        properties_list = properties_list.filter(status=status)
-    
-    # Filter by price range
-    min_price = request.GET.get('min_price', '')
-    if min_price:
-        properties_list = properties_list.filter(price__gte=min_price)
-    
-    max_price = request.GET.get('max_price', '')
-    if max_price:
-        properties_list = properties_list.filter(price__lte=max_price)
-    
-    # Pagination
-    paginator = Paginator(properties_list, 9)  # 9 properties per page
-    page_number = request.GET.get('page')
-    properties = paginator.get_page(page_number)
-    
-    context = {
-        'properties': properties,
-        'search_query': search_query,
-        'property_type': property_type,
-        'status': status,
-        'min_price': min_price,
-        'max_price': max_price,
-    }
-    return render(request, 'users/real_estate.html', context)
 

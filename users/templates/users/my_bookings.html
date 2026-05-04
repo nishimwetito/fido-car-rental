@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" class="rounded-circle mb-3" width="100" height="100" style="object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px; font-size: 2rem;">
+                            {{ user.username|make_list|first|upper }}
+                        </div>
+                    {% endif %}
+                    <h5 class="card-title">{{ user.get_full_name|default:user.username }}</h5>
+                    <p class="text-muted small">{{ user.email }}</p>
+                    <hr>
+                    <div class="nav flex-column nav-pills text-start">
+                        <a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                        <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user me-2"></i> My Profile</a>
+                        <a href="{% url 'my_bookings' %}" class="nav-link active"><i class="fas fa-calendar-alt me-2"></i> My Bookings</a>
+                        <a href="{% url 'my_listings' %}" class="nav-link"><i class="fas fa-list me-2"></i> My Listings</a>
+                        <a href="{% url 'logout' %}" class="nav-link text-danger mt-3"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>My Bookings</h2>
+                <form method="get" class="d-flex" id="statusFilterForm">
+                    <select name="status" class="form-select form-select-sm" onchange="document.getElementById('statusFilterForm').submit();">
+                        <option value="">All Statuses</option>
+                        <option value="pending" {% if current_status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="confirmed" {% if current_status == 'confirmed' %}selected{% endif %}>Confirmed</option>
+                        <option value="cancelled" {% if current_status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                        <option value="completed" {% if current_status == 'completed' %}selected{% endif %}>Completed</option>
+                    </select>
+                </form>
+            </div>
+            
+            <div class="row">
+                {% for booking in bookings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted small">#{{ booking.id }} • {{ booking.created_at|date:"M d, Y" }}</span>
+                                {% if booking.status == 'pending' %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% elif booking.status == 'confirmed' %}
+                                    <span class="badge bg-success">Confirmed</span>
+                                {% elif booking.status == 'cancelled' %}
+                                    <span class="badge bg-danger">Cancelled</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">{{ booking.status|title }}</span>
+                                {% endif %}
+                            </div>
+                            <h5 class="card-title text-truncate" title="{{ booking.listing.title }}">
+                                <a href="{% url 'listing_detail' booking.listing.slug %}" class="text-decoration-none text-dark">{{ booking.listing.title }}</a>
+                            </h5>
+                            <div class="row mt-3 mb-2">
+                                <div class="col-6">
+                                    <p class="mb-0 text-muted small"><i class="far fa-calendar-alt"></i> Start</p>
+                                    <strong>{{ booking.start_date|date:"M d, Y" }}</strong>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-0 text-muted small"><i class="far fa-calendar-check"></i> End</p>
+                                    <strong>{{ booking.end_date|date:"M d, Y" }}</strong>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-muted small">Total</span><br>
+                                    <strong class="text-primary">${{ booking.total_price }}</strong>
+                                </div>
+                                <a href="{% url 'booking:detail' booking.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center py-5 bg-light rounded">
+                    <i class="far fa-calendar-times fa-3x text-muted mb-3"></i>
+                    <h4>No bookings found</h4>
+                    <p class="text-muted">You haven't made any bookings yet{% if current_status %} with this status{% endif %}.</p>
+                    <a href="{% url 'listing_list' %}" class="btn btn-primary mt-2">Explore Listings</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

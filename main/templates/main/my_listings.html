@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar identical to dashboard -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" class="rounded-circle mb-3" width="100" height="100" style="object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px; font-size: 2rem;">
+                            {{ user.username|make_list|first|upper }}
+                        </div>
+                    {% endif %}
+                    <h5 class="card-title">{{ user.get_full_name|default:user.username }}</h5>
+                    <p class="text-muted small">{{ user.email }}</p>
+                    <hr>
+                    <div class="nav flex-column nav-pills text-start">
+                        <a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                        <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user me-2"></i> My Profile</a>
+                        <a href="{% url 'my_bookings' %}" class="nav-link"><i class="fas fa-calendar-alt me-2"></i> My Bookings</a>
+                        <a href="{% url 'my_listings' %}" class="nav-link active"><i class="fas fa-list me-2"></i> My Listings</a>
+                        <a href="{% url 'logout' %}" class="nav-link text-danger mt-3"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>My Listings</h2>
+                <a href="{% url 'listing_create' %}" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Add New</a>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <div class="row">
+                {% for listing in listings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        {% if listing.main_image %}
+                            <img src="{{ listing.main_image.url }}" class="card-img-top" alt="{{ listing.title }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light text-center py-5">
+                                <i class="fas fa-image fa-3x text-muted mb-2"></i>
+                                <p class="text-muted mb-0">No image</p>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-secondary">{{ listing.asset_type.name }}</span>
+                                {% if listing.is_available %}
+                                    <span class="badge bg-success">Available</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">Unavailable</span>
+                                {% endif %}
+                            </div>
+                            <h5 class="card-title"><a href="{% url 'listing_detail' listing.slug %}" class="text-dark text-decoration-none">{{ listing.title }}</a></h5>
+                            <p class="text-muted small mb-2"><i class="fas fa-map-marker-alt"></i> {{ listing.location }}</p>
+                            <h5 class="text-primary">${{ listing.price }}</h5>
+                            
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted small"><i class="far fa-eye"></i> {{ listing.views_count }} views</span>
+                                <div>
+                                    <a href="{% url 'listing_update' listing.slug %}" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="{% url 'listing_delete' listing.slug %}" class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center py-5 bg-light rounded">
+                    <i class="fas fa-list fa-3x text-muted mb-3"></i>
+                    <h4>No listings found</h4>
+                    <p class="text-muted">You haven't posted any properties or cars yet.</p>
+                    <a href="{% url 'listing_create' %}" class="btn btn-primary mt-2">Create Your First Listing</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

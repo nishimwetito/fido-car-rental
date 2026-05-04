@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'listing_list' %}" class="text-decoration-none">Listings</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ listing.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Main Detail Column -->
+        <div class="col-lg-8 mb-4">
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <div class="mb-2">
+                        <span class="badge bg-primary fs-6 me-2">{{ listing.listing_type.name|title }}</span>
+                        <span class="badge bg-secondary fs-6">{{ listing.asset_type.name }} • {{ listing.category.name }}</span>
+                    </div>
+                    <h1 class="display-5 fw-bold mb-2">{{ listing.title }}</h1>
+                    <p class="text-muted fs-5"><i class="fas fa-map-marker-alt text-danger me-2"></i>{{ listing.location }}</p>
+                </div>
+                <div class="text-end d-none d-md-block">
+                    <h2 class="text-primary fw-bold mb-0">${{ listing.price }}</h2>
+                    {% if listing.listing_type.slug == 'rent' %}<p class="text-muted">per day</p>{% endif %}
+                </div>
+            </div>
+
+            <!-- Mobile Price (visible only on small screens) -->
+            <div class="d-block d-md-none mb-4">
+                <h2 class="text-primary fw-bold d-inline">${{ listing.price }}</h2>
+                {% if listing.listing_type.slug == 'rent' %}<span class="text-muted">/ day</span>{% endif %}
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="card border-0 shadow-sm mb-5">
+                {% if listing.main_image %}
+                    <img src="{{ listing.main_image.url }}" class="card-img-top rounded" alt="{{ listing.title }}" style="max-height: 500px; object-fit: cover;">
+                {% else %}
+                    <div class="bg-light text-center py-5 rounded" style="height: 400px;">
+                        <i class="fas fa-image fa-5x text-muted opacity-25 mt-5"></i>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Description -->
+            <div class="mb-5">
+                <h4 class="border-bottom pb-2 mb-3">Description</h4>
+                <p class="fs-5" style="white-space: pre-line;">{{ listing.description }}</p>
+            </div>
+
+            <!-- Details Section -->
+            <div class="mb-5">
+                <h4 class="border-bottom pb-2 mb-3">Key Information</h4>
+                <div class="row g-4">
+                    {% if hasattr listing 'car_detail' %}
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-car fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Make/Model</small>
+                                    <strong>{{ listing.car_detail.make }} {{ listing.car_detail.model }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-calendar fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Year</small>
+                                    <strong>{{ listing.car_detail.year }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-cogs fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Transmission</small>
+                                    <strong>{{ listing.car_detail.get_transmission_display }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    {% if hasattr listing 'property_detail' %}
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-bed fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Bedrooms</small>
+                                    <strong>{{ listing.property_detail.bedrooms|default:"N/A" }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-bath fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Bathrooms</small>
+                                    <strong>{{ listing.property_detail.bathrooms|default:"N/A" }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded me-3"><i class="fas fa-vector-square fa-2x text-primary"></i></div>
+                                <div>
+                                    <small class="text-muted d-block">Area</small>
+                                    <strong>{{ listing.property_detail.area|default:"N/A" }} sqm</strong>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar (Booking & Owner) -->
+        <div class="col-lg-4">
+            <!-- Booking Card -->
+            <div class="card shadow border-0 mb-4 sticky-top" style="top: 20px;">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold">${{ listing.price }}</h3>
+                        <p class="text-muted">{% if listing.listing_type.slug == 'rent' %}per day{% else %}total price{% endif %}</p>
+                    </div>
+
+                    {% if not listing.is_available %}
+                        <div class="alert alert-warning text-center">
+                            <i class="fas fa-exclamation-circle me-2"></i>This listing is currently unavailable.
+                        </div>
+                    {% elif listing.listing_type.is_bookable %}
+                        <a href="{% url 'booking:create' listing.id %}" class="btn btn-primary btn-lg w-100 mb-3 py-3 fw-bold shadow-sm">
+                            <i class="fas fa-calendar-check me-2"></i> Request Booking
+                        </a>
+                        <p class="text-center text-muted small"><i class="fas fa-shield-alt text-success me-1"></i> Safe and secure booking</p>
+                    {% else %}
+                        <!-- For Sale items -->
+                        <a href="mailto:{{ listing.user.email }}" class="btn btn-success btn-lg w-100 mb-3 py-3 fw-bold shadow-sm">
+                            <i class="fas fa-envelope me-2"></i> Contact Seller
+                        </a>
+                    {% endif %}
+                    
+                    <hr class="my-4">
+                    
+                    <!-- Owner Info -->
+                    <h6 class="text-muted mb-3 text-uppercase">Listed By</h6>
+                    <div class="d-flex align-items-center">
+                        {% if listing.user.profile.profile_picture %}
+                            <img src="{{ listing.user.profile.profile_picture.url }}" class="rounded-circle me-3" width="60" height="60" style="object-fit: cover;">
+                        {% else %}
+                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                {{ listing.user.username|make_list|first|upper }}
+                            </div>
+                        {% endif %}
+                        <div>
+                            <h5 class="mb-0">{{ listing.user.get_full_name|default:listing.user.username }}</h5>
+                            <p class="text-muted small mb-0">Member since {{ listing.user.date_joined|date:"Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

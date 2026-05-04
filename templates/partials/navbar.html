@@ -2,7 +2,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-lg">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static 'images/fido-logo.webp' %}" alt="Fido Car Rental Logo">
             <span>Fido Rental</span>
         </a>
@@ -19,10 +19,10 @@
                         Fleet
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
-                        <li><a class="dropdown-item" href="pages/fleet.html">All Vehicles</a></li>
-                        <li><a class="dropdown-item" href="pages/fleet.html#economy">Economy Cars</a></li>
-                        <li><a class="dropdown-item" href="pages/fleet.html#luxury">Luxury Vehicles</a></li>
-                        <li><a class="dropdown-item" href="pages/fleet.html#vans">Vans & Buses</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listing_list' %}">All Vehicles</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listing_list' %}?category=economy">Economy Cars</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listing_list' %}?category=luxury">Luxury Vehicles</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listing_list' %}?category=van">Vans & Buses</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -30,10 +30,10 @@
                         Services
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item" href="pages/services.html">Self-Drive Rental</a></li>
-                        <li><a class="dropdown-item" href="pages/services.html">Chauffeur Service</a></li>
-                        <li><a class="dropdown-item" href="pages/services.html">Airport Transfer</a></li>
-                        <li><a class="dropdown-item" href="pages/services.html">Long-term Rental</a></li>
+                        <li><a class="dropdown-item" href="{% url 'services' %}">Self-Drive Rental</a></li>
+                        <li><a class="dropdown-item" href="{% url 'services' %}">Chauffeur Service</a></li>
+                        <li><a class="dropdown-item" href="{% url 'services' %}">Airport Transfer</a></li>
+                        <li><a class="dropdown-item" href="{% url 'services' %}">Long-term Rental</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -48,18 +48,26 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                 </li>
-                <!-- Updated: Changed from anchor tags to buttons that trigger modals -->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
+                {% endif %}
             </ul>
-            <a href="pages/booking.html" class="btn btn-book-now ms-3">Book Now</a>
+            <a href="{% url 'listing_list' %}" class="btn btn-book-now ms-3">Book Now</a>
         </div>
     </div>
 </nav>

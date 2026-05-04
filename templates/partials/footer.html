@@ -16,23 +16,23 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="pages/fleet.html">Fleet</a></li>
-                        <li><a href="pages/services.html">Services</a></li>
-                        <li><a href="pages/destinations.html">Destinations</a></li>
-                        <li><a href="pages/about.html">About Us</a></li>
-                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'listing_list' %}">Fleet</a></li>
+                        <li><a href="{% url 'services' %}">Services</a></li>
+                        <li><a href="{% url 'destination' %}">Destinations</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="pages/services.html">Self-Drive Rental</a></li>
-                        <li><a href="pages/services.html">Chauffeur Service</a></li>
-                        <li><a href="pages/services.html">Airport Transfer</a></li>
-                        <li><a href="pages/services.html">Long-term Rental</a></li>
-                        <li><a href="pages/services.html">Corporate Packages</a></li>
+                        <li><a href="{% url 'services' %}">Self-Drive Rental</a></li>
+                        <li><a href="{% url 'services' %}">Chauffeur Service</a></li>
+                        <li><a href="{% url 'services' %}">Airport Transfer</a></li>
+                        <li><a href="{% url 'services' %}">Long-term Rental</a></li>
+                        <li><a href="{% url 'services' %}">Corporate Packages</a></li>
                     </ul>
                 </div>
 

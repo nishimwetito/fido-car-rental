@@ -1,73 +1,683 @@
 /* ===================================
-   PROFILE STYLES
+   FIDO CAR RENTAL - CUSTOM STYLES
    =================================== */
 
-/* Profile Cards */
-.hover-shadow {
-    transition: all 0.3s ease;
+:root {
+  --primary-blue: #0052CC;
+  --primary-gold: #FFC107;
+  --dark-gray: #2C3E50;
+  --light-gray: #F8F9FA;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --border-color: #E0E0E0;
+  --success: #28A745;
 }
 
-.hover-shadow:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Profile Images */
-.rounded-circle {
-    border: 3px solid var(--primary-gold);
-    padding: 3px;
+html, body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
 }
 
-/* Card Styles */
-.card {
-    border: none;
-    border-radius: 0.75rem;
-    overflow: hidden;
+/* ===================================
+   NAVBAR STYLES
+   =================================== */
+
+.navbar {
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
 }
 
-.card-header {
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 1.25rem;
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--text-dark) !important;
+  font-size: 1.25rem;
 }
 
-/* Badge Styles */
-.badge {
-    padding: 0.5rem 0.75rem;
-    font-weight: 500;
-    border-radius: 0.5rem;
+.navbar-brand img {
+  height: 45px;
+  width: auto;
 }
 
-/* Modal Styles */
-.modal-content {
-    border-radius: 0.75rem;
-    border: none;
+.navbar-nav .nav-link {
+  color: var(--text-dark) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
 }
 
-.modal-header {
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--light-gray);
+.navbar-nav .nav-link:hover {
+  color: var(--primary-blue) !important;
 }
 
-.modal-footer {
-    border-top: 1px solid var(--border-color);
-    background-color: var(--light-gray);
+.navbar-nav .nav-link.active {
+  color: var(--primary-gold) !important;
 }
 
-/* Form Controls */
-.form-control:focus, 
-.form-select:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 0.2rem rgba(0, 82, 204, 0.1);
+.btn-book-now {
+  background-color: var(--primary-gold);
+  color: var(--text-dark) !important;
+  font-weight: 600;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-/* Responsive Profile */
+.btn-book-now:hover {
+  background-color: #FFB800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+
+.hero-section {
+  background: linear-gradient(135deg, rgba(0, 82, 204, 0.8) 0%, rgba(0, 82, 204, 0.6) 100%);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-content .highlight {
+  color: var(--primary-gold);
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-primary-hero {
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary-hero:hover {
+  background-color: #FFB800;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+.btn-secondary-hero {
+  background-color: transparent;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary-hero:hover {
+  background-color: white;
+  color: var(--primary-blue);
+}
+
+.hero-features {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+/* ===================================
+   SEARCH FORM SECTION
+   =================================== */
+
+.search-form-section {
+  background-color: white;
+  padding: 3rem 0;
+  margin-top: -3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.search-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.search-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.form-group-custom {
+  margin-bottom: 1.5rem;
+}
+
+.form-group-custom label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.form-group-custom input,
+.form-group-custom select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group-custom input:focus,
+.form-group-custom select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+.btn-check-availability {
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-check-availability:hover {
+  background-color: #FFB800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+/* ===================================
+   FLEET SECTION
+   =================================== */
+
+.fleet-section {
+  padding: 4rem 0;
+  background-color: var(--light-gray);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.section-title p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.car-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.car-card-image {
+  width: 100%;
+  height: 250px;
+  background-color: var(--light-gray);
+  overflow: hidden;
+  position: relative;
+}
+
+.car-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.car-card:hover .car-card-image img {
+  transform: scale(1.05);
+}
+
+.car-card-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  z-index: 5;
+}
+
+.car-card-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.car-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.spec-icon {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.car-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.car-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-gold);
+}
+
+.car-price-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.btn-book-car {
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-book-car:hover {
+  background-color: #FFB800;
+  transform: translateY(-2px);
+}
+
+.view-all-button {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.btn-view-all {
+  background-color: transparent;
+  color: var(--primary-gold);
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: 2px solid var(--primary-gold);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-view-all:hover {
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+}
+
+/* ===================================
+   SERVICES SECTION
+   =================================== */
+
+.services-section {
+  padding: 4rem 0;
+  background-color: white;
+}
+
+.service-card {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.service-card:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 8px 20px rgba(0, 82, 204, 0.15);
+  transform: translateY(-5px);
+}
+
+.service-icon {
+  font-size: 3rem;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+}
+
+.service-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.service-card p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ===================================
+   TESTIMONIALS SECTION
+   =================================== */
+
+.testimonials-section {
+  padding: 4rem 0;
+  background-color: white;
+}
+
+.testimonial-card {
+  background-color: var(--light-gray);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid var(--primary-gold);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.testimonial-stars {
+  color: var(--primary-gold);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.testimonial-role {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ===================================
+   CTA SECTION
+   =================================== */
+
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, rgba(0, 82, 204, 0.9) 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.btn-cta {
+  background-color: var(--primary-gold);
+  color: var(--text-dark);
+  padding: 0.75rem 2.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-cta:hover {
+  background-color: #FFB800;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+
+footer {
+  background-color: var(--dark-gray);
+  color: white;
+  padding: 3rem 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary-gold);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--primary-gold);
+}
+
+.footer-contact-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 2rem;
+  padding-top: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
 @media (max-width: 768px) {
-    .rounded-circle {
-        width: 100px !important;
-        height: 100px !important;
-    }
-    
-    .profile-details .row {
-        margin-bottom: 0.5rem;
-    }
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-features {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+
+  .car-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .car-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .search-form {
+    padding: 1.5rem;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+
+  .navbar-brand img {
+    height: 35px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn-primary-hero,
+  .btn-secondary-hero {
+    width: 100%;
+  }
+
+  .section-title h2 {
+    font-size: 1.75rem;
+  }
+
+  .car-price {
+    font-size: 1.5rem;
+  }
+
+  .cta-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+  }
 }
